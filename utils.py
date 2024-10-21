@@ -13,25 +13,18 @@ def get_random_string(length):
     return result_str
 
 
-def plot_class_distribution(dataloader, title):
-    labels = [label for _, label, _ in dataloader.dataset]
-    unique_labels, counts = torch.unique(torch.tensor(labels), return_counts=True)
+def plot_distribution(dataloader, what='class', title='Class Distribution of Rotated MNIST'):
 
-    plt.bar(unique_labels, counts, align='center', alpha=0.7)
-    plt.xticks(unique_labels)
-    plt.xlabel('Class')
-    plt.ylabel('Count')
-    plt.title(title)
-    plt.show()
+    if what == 'class':
+        elems = [klass for _, klass, _ in dataloader.dataset]
+    elif what == 'angle':
+        elems = [angle for _, _, angle in dataloader.dataset]
 
+    unique_elems, counts = torch.unique(torch.tensor(elems), return_counts=True)
 
-def plot_angle_distribution(dataloader, title):
-    angles = [angle for _, _, angle in dataloader.dataset]
-    unique_angles, counts = torch.unique(torch.tensor(angles), return_counts=True)
-
-    plt.bar(unique_angles, counts, align='center', alpha=0.7)
-    plt.xticks(unique_angles)
-    plt.xlabel('Angle')
+    plt.bar(unique_elems, counts, align='center', alpha=0.7)
+    plt.xticks(unique_elems)
+    plt.xlabel(what)
     plt.ylabel('Count')
     plt.title(title)
     plt.show()

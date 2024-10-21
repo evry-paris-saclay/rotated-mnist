@@ -108,7 +108,7 @@ def tasks_rotMNIST(num_tasks,
         test = torchvision.datasets.MNIST('./data/', train=False, download=True, transform=transforms)
 
         train_loader = torch.utils.data.DataLoader(train,  batch_size=batch_size, shuffle=False, num_workers=0, pin_memory=True, generator=g)
-        test_loader = torch.utils.data.DataLoader(test,  batch_size=256, shuffle=True, num_workers=0, pin_memory=True, generator=g)
+        test_loader = torch.utils.data.DataLoader(test,  batch_size=batch_size, shuffle=True, num_workers=0, pin_memory=True, generator=g)
 
         train_loaders.append({
             'loader':train_loader,
